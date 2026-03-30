@@ -19,7 +19,13 @@
                 <p class="eyebrow">Borghese Radar</p>
                 <h1>Trova il ristorante giusto, subito</h1>
             </div>
-            <p class="subtitle">Esplora la classifica nazionale o cerca vicino a te con confronto immediato in mappa.</p>
+            <div class="topbar-side">
+                <p class="subtitle">Esplora la classifica nazionale o cerca vicino a te con confronto immediato in mappa.</p>
+                <button id="infoToggleBtn" class="info-trigger" type="button" aria-haspopup="dialog" aria-controls="infoDialog" aria-expanded="false">
+                    <i class="fas fa-circle-info" aria-hidden="true"></i>
+                    Info
+                </button>
+            </div>
         </header>
 
         <nav class="view-tabs" role="tablist" aria-label="Selezione vista">
@@ -120,6 +126,42 @@
                 <section id="nearbyList" class="cards-list" aria-live="polite"></section>
             </section>
         </main>
+    </div>
+
+    <div id="infoDialog" class="info-dialog" hidden aria-hidden="true">
+        <div id="infoBackdrop" class="info-dialog-backdrop"></div>
+        <section class="info-sheet" role="dialog" aria-modal="true" aria-labelledby="infoDialogTitle">
+            <div class="info-sheet-head">
+                <div>
+                    <p class="eyebrow">Info e Note</p>
+                    <h2 id="infoDialogTitle">Autore e disclaimer</h2>
+                </div>
+                <button id="infoCloseBtn" class="info-close" type="button" aria-label="Chiudi finestra informazioni">
+                    <i class="fas fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="info-sheet-body">
+                <section class="info-block">
+                    <h3>Autore</h3>
+                    <p>Applicazione realizzata come progetto informativo indipendente e presentata nel repository come <strong>4 Ristoranti Fan</strong>.</p>
+                    <p>La finalita dell'app e rendere piu semplice la consultazione dei dati dei ristoranti in forma aggregata e navigabile.</p>
+                </section>
+
+                <section class="info-block">
+                    <h3>Origine e natura dei dati</h3>
+                    <p>I contenuti mostrati derivano da raccolte, rielaborazioni e normalizzazioni di dati relativi al format <strong>4 Ristoranti di Alessandro Borghese</strong>.</p>
+                    <p>Le informazioni possono essere storiche, sintetiche o soggette a modifiche nel tempo senza preavviso.</p>
+                </section>
+
+                <section class="info-block info-block-warning">
+                    <h3>Disclaimer</h3>
+                    <p>I dati presenti nell'app sono pubblicati esclusivamente per consultazione generale, senza garanzia espressa o implicita di completezza, accuratezza, aggiornamento, disponibilita o idoneita a uno specifico scopo.</p>
+                    <p>Indirizzi, coordinate, classifiche, categorie, distanze, descrizioni e ogni altro elemento informativo potrebbero contenere errori, omissioni, imprecisioni o non riflettere la situazione reale e attuale.</p>
+                    <p>Prima di assumere decisioni personali, professionali, organizzative o economiche, l'utente deve verificare in autonomia la correttezza dei dati tramite fonti ufficiali, siti proprietari o contatto diretto con le attivita interessate.</p>
+                    <p>Nei limiti massimi consentiti dalla legge, autore, curatore, manutentore e soggetti eventualmente collegati all'app escludono ogni responsabilita per danni, perdite, costi, contestazioni o conseguenze dirette o indirette di natura legale, economica, patrimoniale o di qualsiasi altro tipo derivanti dall'uso dell'app o dall'affidamento fatto sui contenuti pubblicati.</p>
+                </section>
+            </div>
+        </section>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
