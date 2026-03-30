@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Borghese Radar - App Nuova</title>
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">Borghese Radar</p>
+                <h1>Trova il ristorante giusto, subito</h1>
+            </div>
+            <p class="subtitle">Esplora la classifica nazionale o cerca vicino a te con confronto immediato in mappa.</p>
+        </header>
+
+        <nav class="view-tabs" role="tablist" aria-label="Selezione vista">
+            <button id="tabRanking" class="view-tab is-active" type="button" role="tab" aria-selected="true">
+                <i class="fas fa-trophy" aria-hidden="true"></i>
+                Classifica
+            </button>
+            <button id="tabNearby" class="view-tab" type="button" role="tab" aria-selected="false">
+                <i class="fas fa-location-dot" aria-hidden="true"></i>
+                Vicino a me
+            </button>
+        </nav>
+
+        <div class="view-mode-bar" role="group" aria-label="Modalita visualizzazione">
+            <button id="modeMixedBtn" class="view-mode-btn is-active" type="button" aria-pressed="true">Mappa + Lista</button>
+            <button id="modeMapBtn" class="view-mode-btn" type="button" aria-pressed="false">Solo mappa</button>
+            <button id="modeListBtn" class="view-mode-btn" type="button" aria-pressed="false">Solo lista</button>
+        </div>
+
+        <main>
+            <article class="map-hero map-hero-shared">
+                <div class="map-hero-head">
+                    <h2 id="mapTitle">Panoramica in mappa</h2>
+                    <p id="mapSubtitle">La mappa guida sia la classifica sia la ricerca locale.</p>
+                </div>
+                <div id="resultsMap" class="map-canvas" aria-label="Mappa risultati"></div>
+                <div id="mapMeta" class="hero-meta"></div>
+            </article>
+
+            <article id="rankingControls" class="control-card contextual-panel">
+                <div class="control-grid">
+                    <label>
+                        <span>Regione</span>
+                        <select id="rankingRegionSelect"></select>
+                    </label>
+                    <label>
+                        <span>Metrica</span>
+                        <select id="rankingMetricSelect">
+                            <option value="rating_avg">Voto finale</option>
+                            <option value="rating_location">Location</option>
+                            <option value="rating_menu">Menu</option>
+                            <option value="rating_service">Servizio</option>
+                            <option value="rating_bill">Conto</option>
+                        </select>
+                    </label>
+                    <label>
+                        <span>Elementi</span>
+                        <select id="rankingLimitSelect">
+                            <option value="8">Top 8</option>
+                            <option value="12">Top 12</option>
+                            <option value="20" selected>Top 20</option>
+                            <option value="40">Top 40</option>
+                            <option value="all">Tutti i ristoranti</option>
+                        </select>
+                    </label>
+                </div>
+            </article>
+
+            <article id="nearbyControlsPanel" class="control-card search-dock contextual-panel" hidden aria-label="Ricerca vicino a me">
+                <div class="search-dock-head">
+                    <div>
+                        <p class="eyebrow">Vicino a me</p>
+                        <h2>Inserisci posizione e distanza</h2>
+                    </div>
+                    <p class="search-dock-copy">Imposta indirizzo o GPS, scegli il raggio e guarda subito i risultati sulla mappa.</p>
+                </div>
+                <div class="nearby-controls">
+                    <label class="address-field">
+                        <span>Indirizzo</span>
+                        <input id="addressInput" type="text" placeholder="Via Roma 1, Milano">
+                    </label>
+                    <button id="addressSearchBtn" class="btn-primary" type="button">
+                        <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+                        Cerca
+                    </button>
+                    <button id="gpsBtn" class="btn-ghost" type="button">
+                        <i class="fas fa-location-crosshairs" aria-hidden="true"></i>
+                        GPS
+                    </button>
+                    <label>
+                        <span>Raggio</span>
+                        <select id="radiusSelect">
+                            <option value="5">5 km</option>
+                            <option value="10" selected>10 km</option>
+                            <option value="20">20 km</option>
+                            <option value="50">50 km</option>
+                        </select>
+                    </label>
+                </div>
+                <p id="nearbyStatus" class="status-line">Imposta un indirizzo o usa il GPS per iniziare.</p>
+            </article>
+
+            <section id="rankingSection" class="screen is-active" aria-label="Classifica ristoranti">
+                <section id="rankingList" class="cards-list" aria-live="polite"></section>
+            </section>
+
+            <section id="nearbySection" class="screen" aria-label="Ricerca vicino a me" hidden>
+                <section id="nearbyList" class="cards-list" aria-live="polite"></section>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="restaurant_data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
