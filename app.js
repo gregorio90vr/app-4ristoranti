@@ -17,6 +17,10 @@ const state = {
 
 const dom = {
     appShell: document.querySelector(".app-shell"),
+    infoDialog: document.getElementById("infoDialog"),
+    infoBackdrop: document.getElementById("infoBackdrop"),
+    infoToggleBtn: document.getElementById("infoToggleBtn"),
+    infoCloseBtn: document.getElementById("infoCloseBtn"),
     tabRanking: document.getElementById("tabRanking"),
     tabNearby: document.getElementById("tabNearby"),
     modeMixedBtn: document.getElementById("modeMixedBtn"),
@@ -87,6 +91,9 @@ if (hasLeaflet) {
 }
 
 function bindEvents() {
+    dom.infoToggleBtn.addEventListener("click", openInfoDialog);
+    dom.infoCloseBtn.addEventListener("click", closeInfoDialog);
+    dom.infoBackdrop.addEventListener("click", closeInfoDialog);
     dom.tabRanking.addEventListener("click", () => setTab("ranking"));
     dom.tabNearby.addEventListener("click", () => setTab("nearby"));
     dom.modeMixedBtn.addEventListener("click", () => setViewMode("mixed"));
@@ -129,6 +136,26 @@ function bindEvents() {
             }
         }
     });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !dom.infoDialog.hidden) {
+            closeInfoDialog();
+        }
+    });
+}
+
+function openInfoDialog() {
+    dom.infoDialog.hidden = false;
+    dom.infoDialog.setAttribute("aria-hidden", "false");
+    dom.infoToggleBtn.setAttribute("aria-expanded", "true");
+    document.body.classList.add("dialog-open");
+}
+
+function closeInfoDialog() {
+    dom.infoDialog.hidden = true;
+    dom.infoDialog.setAttribute("aria-hidden", "true");
+    dom.infoToggleBtn.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("dialog-open");
 }
 
 function setViewMode(mode) {
